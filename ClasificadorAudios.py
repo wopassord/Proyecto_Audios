@@ -18,7 +18,7 @@ class ClasificadorAudios:
         self.archivo_parametros_db = os.path.join(self.carpeta_db, "parametros_DB.csv")
         self.archivo_parametros_candidato = os.path.join(self.carpeta_db, "parametros_candidato.csv")
         self.preprocesador = Preprocesador(self.carpeta_crudos, self.carpeta_procesados)
-        self.parametrizador_db = Parametrizador(self.carpeta_aumentados, self.archivo_parametros_db)
+        self.parametrizador_db = Parametrizador(self.carpeta_aumentados, self.archivo_parametros_db) #CAMBIAR ACA LA CARPETA PARA TRABAJAR CON PARAMETROS AUMENTADOS/PROCEASADOS
         self.parametrizador_candidato = Parametrizador(self.carpeta_candidato, self.archivo_parametros_candidato)
         self.grabadora = Grabadora(self.carpeta_candidato)
         self.knn = KNN(self.archivo_parametros_db, self.archivo_parametros_candidato, k=10)
@@ -30,37 +30,35 @@ class ClasificadorAudios:
         while True:
             print("\n--- Clasificador de Audios ---")
             print("1. Procesar Base de Datos")
-            print("2. Extraer Parámetros de la Base de Datos")
-            print("3. Grabar Audio Candidato")
-            print("4. Extraer Parámetros del Audio Candidato")
-            print("5. Clasificar el Audio Candidato")
-            print("6. Clasificar con Variables Seleccionadas")
-            print("7. Aumentar Datos de la Base de Datos")
-            print("8. Grabar nuevo audio")
-            print("9. Salir")
+            print("2. Aumentar Datos de la Base de Datos")
+            print("3. Extraer Parámetros de la Base de Datos")
+            print("4. Grabar, extraer parámetros y clasificar Audio Candidato (Layered)")
+            print("5. Grabar nuevo audio")
+            print("6. Clasificar audio candidato actual")
+            print("7. Salir")
             opcion = input("Seleccione una opción: ")
 
             if opcion == "1":
                 self.procesar_base_datos()
             elif opcion == "2":
-                self.extraer_parametros_db()
+                self.aumentar_datos_db()
             elif opcion == "3":
-                self.grabar_audio_candidato()
+                self.extraer_parametros_db()
             elif opcion == "4":
+                self.grabar_audio_candidato()
                 self.extraer_parametros_candidato()
-            elif opcion == "5":
-                self.clasificar_audio_candidato()
-            elif opcion == "6":
+                self.knn.knn_layered()
+            elif opcion == '5':
+                self.grabar_audio_crudo()
+            elif opcion == '6':
                 self.clasificar_audio_con_variables()
             elif opcion == "7":
-                self.aumentar_datos_db()
-            elif opcion == '8':
-                self.grabar_audio_crudo()
-            elif opcion == "9":
                 print("Saliendo del sistema. ¡Adiós!")
                 break
             else:
                 print("Opción inválida. Intente nuevamente.")
+            "self.clasificar_audio_candidato()" #MÉTODO VIEJO PARA TRABAJAR CON PCA Y SIN PCA
+            "self.clasificar_audio_con_variables()" #MÉTODO VIEJO ANTES DEL KNN LAYERED (verificar si garpa)
 
     def procesar_base_datos(self):
         """

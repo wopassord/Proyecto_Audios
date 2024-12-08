@@ -1,0 +1,17 @@
+zcr, rms, MFCC_4
+zcr, mfcc 1 y mfcc 4
+zcr, mfcc3 y mfcc 4
+rms centroide mfcc 4
+rms mfcc 1 y mfcc 4
+rms mfcc 3 y mfcc 4
+centroide, ancho de banda, mfcc 4
+centroide, mfcc 3 y mfcc 4
+
+mas diferencia entre camote y zanahoria:
+
+MFCC_3            MFCC_3          0.224792
+MFCC_8            MFCC_8          0.196895   19
+RMS                  RMS          0.174640
+Ancho_Banda  Ancho_Banda          0.169678    4
+MFCC_15          MFCC_15          0.159570    12
+MFCC_17          MFCC_17          0.148405
